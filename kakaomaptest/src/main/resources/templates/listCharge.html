@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>충전소 목록</title>
+</head>
+<body>
+<h1>충전소 목록</h1>
+<br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Charge ID</th>
+            <th>충전소 명</th>
+            <th>충전소 주소</th>
+            <th>충전소 타입</th>
+            <th>회사명</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each ="charge : ${allCharges}">
+            <td><a th:href="@{/viewCharge/{id}(id=${charge.chargeId})}"  th:text="${charge.chargeId}"></a></td>
+            <td th:text="${charge.chargeName}"></td>
+            <td th:text="${charge.chargeAddr}"></td>
+            <td th:text="${charge.chargeType}"></td>
+            <td th:text="${charge.busiName}"></td>
+            <td>
+                <a th:href="@{/updateViewCharge/{id}(id=${charge.chargeId})}" >수정</a>,
+                <a th:href="@{/deleteCharge/{id}(id=${charge.chargeId})}" >삭제</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<br/><br/>
+<a href="/">Main Page</a>
+</body>
+</html>

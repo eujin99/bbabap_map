@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>충전소 추가하기</title>
+</head>
+<body>
+<h1>충전소 추가하기</h1>
+<form method="POST" action="/addCharge">
+    <div>
+        <label>Charge ID</label>
+        <input type="text" id="chargeId" name="chargeId">
+    </div>
+    <div>
+        <label>충전소 이름</label>
+        <input type="text" id="chargeName" name="chargeName">
+    </div>
+    <div>
+        <label>충전소 주소</label>
+        <input type="text" id="chargeAddr" name="chargeAddr">
+    </div>
+    <div>
+        <label>충전기 타입</label>
+        <input type="text" id="chargeType" name="chargeType">
+    </div>
+    <div>
+        <label>회사명</label>
+        <input type="text" id="busiName" name="busiName">
+    </div>
+    <div>
+        <p><br></p>
+        <input type="submit" id="addNew" value="Submit">
+    </div>
+</form>
+<p><br></p>
+<p><a href="/">Main</a></p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>충전소 상세</title>
+</head>
+<body>
+<h1>충전소 상세</h1>
+<div>
+    <span>Charge ID : </span>
+    <span th:text="${charge.chargeId}"></span>
+</div>
+<div>
+    <span>충전소 이름 : </span>
+    <span th:text="${charge.chargeName}"></span>
+</div>
+<div>
+    <span>충전소 주소 : </span>
+    <span th:text="${charge.chargeAddr}"></span>
+</div>
+<div>
+    <span>충전기 타입 : </span>
+    <span th:text="${charge.chargeType}"></span>
+</div>
+<div>
+    <span>회사명 : </span>
+    <span th:text="${charge.busiName}"></span>
+</div>
+<br>
+<br>
+<div>
+    <a th:href="@{/updateViewCharge/{id}(id=${charge.chargeId})}" >수정</a> /
+    <a th:href="@{/deleteCharge/{id}(id=${charge.chargeId})}" >삭제</a>
+</div>
+<p><br></p>
+<p><a href="/listCharge">List Charge</a></p>
+</body>
+</html>

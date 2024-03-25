@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>충전소 수정</title>
+</head>
+<body>
+<h1>충전소 수정</h1>
+<form th:action="@{/updateCharge/{id}(id=${charge.chargeId})}" method="POST" >
+    <div>
+        <label>Charge ID :</label>
+        <span th:text="${charge.chargeId}"></span>
+        <input type="hidden" th:field="*{charge.chargeId}" >
+    </div>
+    <div>
+        <label>충전소 이름  </label>
+        <input type="text" th:field="*{charge.chargeName}" >
+    </div>
+    <div>
+        <label>충전소 주소  </label>
+        <input type="text" th:field="*{charge.chargeAddr}" >
+    </div>
+    <div>
+        <label>충전기 타입</label>
+        <input type="text" th:field="*{charge.chargeType}" >
+    </div>
+    <div>
+        <label>회사명</label>
+        <input type="text" th:field="*{charge.busiName}" >
+    </div>
+    <div>
+        <p><br></p>
+        <input type="submit" id="addNew" value="Submit">
+    </div>
+</form>
+<p><br></p>
+<p><a href="/">Main</a></p>
+</body>
+</html>
