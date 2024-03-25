@@ -1,15 +1,19 @@
 package com.example.kakaomaptest.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.example.kakaomaptest.Charge;
 import com.example.kakaomaptest.data.repository.ChargeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ChargeService {
+
     private final ChargeRepository chargeRepository;
+
+    @Autowired
     public ChargeService(ChargeRepository chargeRepository) {
         this.chargeRepository = chargeRepository;
     }
@@ -19,8 +23,7 @@ public class ChargeService {
     }
 
     public Charge getChargeById(String id) {
-        Optional<Charge> charge = chargeRepository.findById(id);
-        return charge.get();
+        return chargeRepository.findById(id).orElse(null);
     }
 
     public void saveCharge(Charge charge) {
@@ -34,5 +37,21 @@ public class ChargeService {
     public void deleteCharge(String id) {
         chargeRepository.deleteById(id);
     }
+
+    public List<Charge> searchCharges(String searchType, String searchKeyword) {
+        switch (searchType) {
+            case "chargeName":
+                return chargeRepository.findByChargeNameContaining(searchKeyword);
+            case "chargeAddr":
+                return chargeRepository.findByChargeAddrContaining(searchKeyword);
+            case "chargeType":
+                return chargeRepository.findByChargeTypeContaining(searchKeyword);
+            case "busiName":
+                return chargeRepository.findByBusiNameContaining(searchKeyword);
+            default:
+                return new ArrayList<>();
+        }
+    }
+
 
 }

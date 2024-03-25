@@ -6,6 +6,23 @@
 </head>
 <body>
 <h1>충전소 목록</h1>
+
+<!-- 검색 폼 -->
+<form action="/listCharge" method="get">
+    <div>
+        <label>검색 조건: </label>
+        <select name="searchType">
+            <option value="chargeName">충전소 명</option>
+            <option value="chargeAddr">충전소 주소</option>
+            <option value="chargeType">충전소 타입</option>
+            <option value="busiName">회사명</option>
+        </select>
+        <input type="text" name="searchKeyword" placeholder="검색어 입력"/>
+        <input type="submit" value="검색"/>
+    </div>
+</form>
+<!-- 검색 폼 끝 -->
+
 <br/>
 <div>
     <table border="1">
@@ -16,6 +33,7 @@
             <th>충전소 타입</th>
             <th>회사명</th>
             <th>Action</th>
+            <th>즐겨찾기</th>
         </tr>
         <tr th:each ="charge : ${allCharges}">
             <td><a th:href="@{/viewCharge/{id}(id=${charge.chargeId})}"  th:text="${charge.chargeId}"></a></td>
@@ -27,10 +45,51 @@
                 <a th:href="@{/updateViewCharge/{id}(id=${charge.chargeId})}" >수정</a>,
                 <a th:href="@{/deleteCharge/{id}(id=${charge.chargeId})}" >삭제</a>
             </td>
+            <td>
+                <!-- 즐겨찾기 체크박스 버튼 추가 -->
+                <input type="checkbox" class="favorite-checkbox" data-charge-id="${charge.chargeId}" />
+            </td>
         </tr>
     </table>
 </div>
+
 <br/><br/>
+<!-- 즐겨찾기 확인 버튼 -->
+<div>
+    <button id="confirmFavorites">즐겨찾기 확인</button>
+</div>
+
 <a href="/">Main Page</a>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#confirmFavorites').addEventListener('click', function() {
+            // 모든 즐겨찾기 체크박스의 상태를 수집
+            const favoriteData = Array.from(document.querySelectorAll('.favorite-checkbox')).map(checkbox => ({
+                chargeId: checkbox.dataset.chargeId,
+                isFavorite: checkbox.checked
+            }));
+
+            // AJAX 요청으로 서버에 즐겨찾기 데이터 전송
+            fetch('/updateFavorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(favoriteData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('즐겨찾기가 업데이트 되었습니다.');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('오류가 발생했습니다.');
+                });
+        });
+    });
+</script>
+
+
 </body>
 </html>
