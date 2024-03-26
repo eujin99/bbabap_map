@@ -74,4 +74,6 @@ public class Charge {
         return "chargeId:" + chargeId + ",chargeName:" + chargeName + ",chargeAddr:" + chargeAddr
                 + ",chargeType:" + chargeType + ",busiName:" + busiName;
     }
+
+
 }
